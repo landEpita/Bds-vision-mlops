@@ -16,6 +16,13 @@ Ce projet est un exemple de mlops appliqué à des problematiques de computer vi
 - [Introduction](#Introduction)
 - [Pré-requis](#Pré-requis)
 - [Installation](#Installation)
+  - [Training](#Training)
+  - [Serving](#Serving)
+- [Utilisation](#Utilisation)
+  - [Entrainement](#Entrainement)
+  - [Production](#Production)
+- [Link](#Link)
+
 
 
 
@@ -93,6 +100,21 @@ Une fois lancé, nous avons 3 images docker qui tourne en parallele.
 - [Prometheus](https://prometheus.io/docs/) qui tourne sur le port **9090**
 - [Grafana](https://grafana.com/) qui tourne sur le port **3000**
 
+Il est important de lier le Server ainsi que le dossier mlruns dans un volume commun.
+
+Voici un exemple:
+
+```yaml
+api:
+    image: land95/mlflow-server:0.5
+    ports:
+     - "5001:5001"
+    volumes:
+      - "./model/:/app"
+```
+
+> ici notre dossier mlruns va etre créé a l'endroit ou est entrainé le model.
+
 ## Utilisation
 
 ### Entrainement
@@ -103,22 +125,48 @@ Notre premier objectif est de pouvoir logger les differentes metrics, parametres
 
 Pour cela nous allons utiliser [Mlflow](https://github.com/mlflow/mlflow).
 
-<p align="center">
-  <img src="./imgReadme/Image2.PNG" alt="Size Limit CLI" width="738">
-</p>
+![](./imgReadme/Image2.PNG)
 
 Cette outils va tracker chaque entrainement afin de stocker les différentes informations qui nous intéresse dans une base de donnée.
 
 Grace a l'interface utilisateur de [Mlflow](https://github.com/mlflow/mlflow), nous pouvons avoir acces aux differents informations de chacun des runs.
 
 
-<p align="center">
-  <img src="https://i2.wp.com/pycaret.org/wp-content/uploads/2020/07/classification_mlflow_ui.png?fit=1919%2C902&ssl=1" alt="Size Limit CLI" width="738">
-</p>
+![](https://i2.wp.com/pycaret.org/wp-content/uploads/2020/07/classification_mlflow_ui.png?fit=1919%2C902&ssl=1)
 
-et même mettre en production un model sauvegarder grave au model registry
+et même mettre en production un model sauvegarder grave au model registry.
 
 ![](https://www.mlflow.org/docs/latest/_images/oss_registry_3_overview.png)
+
+> Cette partie est trés importante pour la suite ! Je vous conseille vivement de vous renseigner sur [Mlflow](https://github.com/mlflow/mlflow).
+
+### Production
+
+#### Server
+
+Une fois notre modele entrainé et mis en production dans le model registry, nous allons pouvoir serve le model.
+
+Lors de l'installation nous avons lié par un volume docker le **mlruns** (qui est la DB des models de mlflow) avec notre images docker.
+
+> Si ce n'est pas le cas voir la partie: [Serving](#Serving)
+
+Pour faire un inférence sur le model qui est en serving, il suffit d'envoyer les données sur la route **predict** suivi du nom du model mit en production dans le model registry comme ceci:   
+``http://127.0.0.1:5001/predict/<name>``  
+
+Les données doivent être passé dans le body en format **JSON** avec la clé **data**. Voici un exemple de client pyton qui se trouve dans le dossier **example_client**.
+
+```python
+images = np.random.randint(0, 1, size=(10,150, 150, 3)).tolist()
+
+data = json.dumps({"signature_name": "serving_default", "data": images})
+headers = {"content-type": "application/json"}
+json_response = requests.post(f'http://127.0.0.1:5001/predict/model', data=data, headers=headers)
+```
+___
+#### Prometheus
+
+
+
 
 ## Link
 

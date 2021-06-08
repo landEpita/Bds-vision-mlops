@@ -5,7 +5,7 @@ services:
     ports:
      - "5001:5001"
     volumes:
-      - "./model:/app"
+      - "./model/:/app"
     networks:
       example-network:
         ipv4_address: 172.16.238.10
