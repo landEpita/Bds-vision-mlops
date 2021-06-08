@@ -104,7 +104,7 @@ Notre premier objectif est de pouvoir logger les differentes metrics, parametres
 Pour cela nous allons utiliser [Mlflow](https://github.com/mlflow/mlflow).
 
 <p align="center">
-  <img src="./imgReadme/Image2.png" alt="Size Limit CLI" width="738">
+  <img src="./imgReadme/Image2.PNG" alt="Size Limit CLI" width="738">
 </p>
 
 Cette outils va tracker chaque entrainement afin de stocker les différentes informations qui nous intéresse dans une base de donnée.
