@@ -7,6 +7,8 @@
 ![GitHub Licence](https://img.shields.io/github/license/seldonio/alibi-detect.svg)
 
 
+:star: Star us on GitHub — it motivates us a lot!
+
 Ce projet est un exemple de mlops appliqué à des problematiques de computer vision.
 
 
