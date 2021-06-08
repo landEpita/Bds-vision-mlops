@@ -1,0 +1,4 @@
+numpy==1.19.5
+tensorflow==2.5.0-rc0
+mlflow==1.15.0
+
