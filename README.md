@@ -1,5 +1,12 @@
 # MLOPS Computer vision
 
+[![Build Status](https://github.com/SeldonIO/alibi-detect/workflows/CI/badge.svg?branch=master)](https://github.com/SeldonIO/alibi-detect/actions?query=workflow%3A%22CI%22)
+[![Documentation Status](https://readthedocs.org/projects/alibi-detect/badge/?version=latest)](https://docs.seldon.io/projects/alibi-detect/en/latest/?badge=latest)
+![Python version](https://img.shields.io/badge/python-3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue.svg)
+[![PyPI version](https://badge.fury.io/py/alibi-detect.svg)](https://badge.fury.io/py/alibi-detect)
+![GitHub Licence](https://img.shields.io/github/license/seldonio/alibi-detect.svg)
+
+
 Ce projet est un exemple de mlops appliqué à des problematiques de computer vision.
 
 
@@ -25,7 +32,7 @@ Grâce au MLOps les cycles de vie de développement et d’opération de systèm
 
 Ce qu'il est requis pour commencer:
 
-- Docker
+- [Docker](https://www.docker.com/)
 - Python==3.8
 
 ## Installation
@@ -80,23 +87,38 @@ Cependant il est possible de les construire et les lancer indépendament sans do
 
 > Il est possible de changer le port d'accès sur la machine `-p <PORT>:5001`, on peut aussi le modifier dans le `docker-compose.yml`.
 
+Une fois lancé, nous avons 3 images docker qui tourne en parallele. 
+
+- Le server en [Fastapi](https://fastapi.tiangolo.com/) qui tourne sur le port **5001**
+- [Prometheus](https://prometheus.io/docs/) qui tourne sur le port **9090**
+- [Grafana](https://grafana.com/) qui tourne sur le port **3000**
+
 ## Utilisation
 
-Une fois notre API lancé. Nous pouvons lui envoyer des requêtes.
+### Entrainement
 
-Les requêtes doivent être envoyé sur le port 5001 (mais ce port peut-être modifié).
+Nous chechons a classifiers des images par classe. Notre modele est un [convolutional neural network](https://fr.wikipedia.org/wiki/R%C3%A9seau_neuronal_convolutif) (CNN) dit prend en entré des images de taille (35,35) et ressort un vecteur de taille N qui reprensent les N classes.
 
-voici un exemple de requête en Python.
+Notre premier objectif est de pouvoir logger les differentes metrics, parametres, data et modeles.
+
+Pour cela nous allons utiliser [Mlflow](https://github.com/mlflow/mlflow).
+
+![](./imgReadme/Image2.png)
+
+Cette outils va tracker chaque entrainement afin de stocker les différentes informations qui nous intéresse dans une base de donnée.
+
+Grace a l'interface utilisateur de [Mlflow](https://github.com/mlflow/mlflow), nous pouvons avoir acces au differents informations de chacun des runs.
+
+![](https://www.google.com/url?sa=i&url=https%3A%2F%2Fpycaret.org%2Fmlflow%2F&psig=AOvVaw2cCFHTOoizkmeBujDLjccg&ust=1623245731366000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKiPgt6TiPECFQAAAAAdAAAAABAD)
 
 
 
-## Framework
+## Link
 
-- Mlflow
-- DVC
-- Fastapi
-- Prometheus
-- Grafana
-
-## Installation
-
+- [Mlflow](https://github.com/mlflow/mlflow)
+- [Tensorflow](https://www.tensorflow.org/?hl=fr)
+- [DVC](https://dvc.org/)
+- [Fastapi](https://fastapi.tiangolo.com/)
+- [Prometheus](https://prometheus.io/docs/instrumenting/clientlibs/)
+- [Grafana](https://grafana.com/)
+- [Docker](https://www.docker.com/)
