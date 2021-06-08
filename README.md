@@ -103,13 +103,18 @@ Notre premier objectif est de pouvoir logger les differentes metrics, parametres
 
 Pour cela nous allons utiliser [Mlflow](https://github.com/mlflow/mlflow).
 
-![](./imgReadme/Image2.png)
+<p align="center">
+  <img src="./imgReadme/Image2.png" alt="Size Limit CLI" width="738">
+</p>
 
 Cette outils va tracker chaque entrainement afin de stocker les différentes informations qui nous intéresse dans une base de donnée.
 
 Grace a l'interface utilisateur de [Mlflow](https://github.com/mlflow/mlflow), nous pouvons avoir acces au differents informations de chacun des runs.
 
-![](https://www.google.com/url?sa=i&url=https%3A%2F%2Fpycaret.org%2Fmlflow%2F&psig=AOvVaw2cCFHTOoizkmeBujDLjccg&ust=1623245731366000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCKiPgt6TiPECFQAAAAAdAAAAABAD)
+
+<p align="center">
+  <img src="https://i2.wp.com/pycaret.org/wp-content/uploads/2020/07/classification_mlflow_ui.png?fit=1919%2C902&ssl=1" alt="Size Limit CLI" width="738">
+</p>
 
 
 
