@@ -23,6 +23,9 @@ Ce projet est un exemple de mlops appliqué à des problematiques de computer vi
 - [Utilisation](#Utilisation)
   - [Entrainement](#Entrainement)
   - [Production](#Production)
+    - [Server](#Server)
+    - [Prometheus](#Prometheus)
+    - [Grafana](#Grafana)
 - [Link](#Link)
 
 
@@ -167,8 +170,17 @@ json_response = requests.post(f'http://127.0.0.1:5001/predict/model', data=data,
 ___
 #### Prometheus
 
+[Prometheus](https://prometheus.io/docs/instrumenting/clientlibs/) permet de logger se qu'il se passe sur le server. Il va log les metrics de l'api (nombre de requet, temps par requet, ...) ainsi que des metrics lier à notre model en production.
 
+Vous pouvez voir les logs ici: http://127.0.0.1:5001/metrics
 
+___
+
+#### Grafana 
+
+![](./imgReadme/Image1.png)
+
+[Grafana](https://grafana.com/) est un logiciel open-source de visualition
 
 ## Link
 
